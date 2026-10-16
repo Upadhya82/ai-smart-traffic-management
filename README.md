@@ -28,3 +28,4 @@ cd ai-smart-traffic-management
 # Install dependencies (once requirements.txt is added)
 pip install -r requirements.txt
 ```
+
