@@ -103,3 +103,4 @@ def print_traffic_summary(counts: ApproachCounts) -> None:
         counts: Dictionary mapping approach name (str) to vehicle count (int).
     """
     print(generate_traffic_summary(counts))
+
