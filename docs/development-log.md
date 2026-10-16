@@ -45,3 +45,4 @@
 - Introduce Python variables, traffic-related data structures (dictionaries, lists, tuples).
 - Model traffic intersection approaches, lane queues, and signal phase states in Python code.
 - Write modular functions to simulate vehicle counts and queue updates.
+

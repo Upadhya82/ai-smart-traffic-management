@@ -35,3 +35,4 @@ The **AI Smart Traffic Management System** applies computer vision and adaptive 
 - **Fail-Safe Design Principles**: Any real-world traffic control system must feature hardware-enforced fail-safes (conflict monitors) preventing conflicting green phases regardless of software output.
 - **Hardware Compatibility**: Designed with resource-conscious architectures to ensure smooth execution on consumer hardware (e.g., modern multi-core CPUs and integrated GPUs).
 - **Privacy Compliance**: All video processing is designed for real-time edge processing; no personal identifiable information (PII) such as license plates or facial recognition is retained or stored.
+
