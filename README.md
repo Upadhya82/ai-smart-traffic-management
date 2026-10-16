@@ -1,7 +1,7 @@
 # AI Smart Traffic Management System
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Status](https://img.shields.io/badge/Status-Day%201%20Completed-brightgreen.svg)]()
+[![Status](https://img.shields.io/badge/Status-Day%202%20Completed-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-green.svg)]()
 
 An intelligent, vision-based traffic management and signal control simulation designed to analyze traffic density, detect vehicles and pedestrians, and adaptively optimize intersection signal timings.
@@ -42,12 +42,13 @@ For detailed problem definition and safety scope, see [Project Goals](docs/proje
 
 ## 🗺️ Development Roadmap
 - [x] **Day 1**: Project initialization, environment verification, Git/GitHub setup, and documentation structure.
-- [ ] **Day 2**: Python fundamentals review, data structures, and initial traffic domain modeling (intersections, lanes, signals).
-- [ ] **Day 3**: Video ingestion pipeline, frame extraction, and region-of-interest (ROI) configuration.
-- [ ] **Day 4**: Background subtraction & classic computer vision vehicle counting basics.
-- [ ] **Day 5**: Deep learning object detection integration (vehicle & pedestrian detection).
-- [ ] **Day 6**: Multi-object tracking and lane-based counting logic.
-- [ ] **Day 7**: Adaptive signal timing algorithm and simulation dashboard.
+- [x] **Day 2**: Python fundamentals review, data structures, and initial traffic domain modeling (intersections, lanes, signals).
+- [ ] **Day 3**: Advanced data structures, vehicle queues, and arrival/departure flow simulation.
+- [ ] **Day 4**: Video ingestion pipeline, frame extraction, and region-of-interest (ROI) configuration.
+- [ ] **Day 5**: Background subtraction & classic computer vision vehicle counting basics.
+- [ ] **Day 6**: Deep learning object detection integration (vehicle & pedestrian detection).
+- [ ] **Day 7**: Multi-object tracking and lane-based counting logic.
+- [ ] **Day 8**: Adaptive signal timing algorithm and simulation dashboard.
 
 ---
 
@@ -61,8 +62,12 @@ ai-smart-traffic-management/
 ├── docs/                    # Architectural and development documentation
 │   ├── project-goals.md     # Problem statement, solution architecture, safety scope
 │   └── development-log.md   # Daily development progress log
-└── src/                     # Source package for core modules
-    └── __init__.py          # Package initialization
+├── src/                     # Source package for core modules
+│   ├── __init__.py          # Package initialization
+│   └── traffic_data.py      # Traffic counts and demand classification
+└── tests/                   # Automated test suite
+    ├── __init__.py          # Tests package initialization
+    └── test_traffic_data.py # Unit tests for traffic data calculations
 ```
 
 ---
