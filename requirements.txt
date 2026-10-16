@@ -1,0 +1,16 @@
+# AI Smart Traffic Management System - Dependencies
+# Note: Initial dependencies defined for Day 1 planning.
+# To be installed when computer vision modules are introduced.
+
+# Core Scientific Computing & Image Processing
+numpy>=1.26.0
+opencv-python>=4.9.0.80
+
+# Visualization & Utilities (Planned for future days)
+# matplotlib>=3.8.0
+# pillow>=10.2.0
+
+# Computer Vision & Deep Learning (Planned for model detection days)
+# ultralytics>=8.1.0
+# torch>=2.2.0
+# torchvision>=0.17.0

@@ -3,11 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environments
-.venv/
-venv/
-ENV/
-env/
+# C extensions
+*.so
 
 # Distribution / packaging
 build/
@@ -26,28 +23,56 @@ wheels/
 .installed.cfg
 *.egg
 
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
 
-# Environments & secrets
+# Environments, credentials, and secrets
 .env
-.env.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.p12
 
-# IDEs & Editors
+# IDEs and Editors
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
+*.swp
+*.swo
 
-# Large datasets and media
-data/raw/
+# Datasets, archives, and media files
+data/
+datasets/
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
 *.mp4
 *.avi
 *.mkv
 *.mov
 
-# AI / ML weights & runs
+# AI / ML model weights and training runs
 runs/
+checkpoints/
+models/*.pt
+models/*.onnx
+models/*.engine
+models/*.weights
+models/*.tflite
+models/*.h5
 *.pt
 *.onnx
 *.engine
@@ -55,10 +80,15 @@ runs/
 *.tflite
 *.h5
 
-# OS generated files
+# Logs and temporary files
+logs/
+*.log
+tmp/
+temp/
+
+# Operating system files
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 .DS_Store
-
