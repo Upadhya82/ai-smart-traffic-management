@@ -92,3 +92,48 @@
 - Explore Python collections in greater depth: Lists of dictionaries, filtering, and sorting traffic data.
 - Introduce simulated vehicle queues with arrival/departure rates.
 - Model multi-lane approaches and compute weighted queue delays.
+
+---
+
+## Day 3: Control Flow, Traffic Analysis & Signal Demand Selection
+- **Date**: October 18, 2026
+- **Status**: Completed
+
+### 1. Work Completed
+- **Traffic Demand Selection Logic (`src/traffic_data.py`)**:
+  - Implemented `select_highest_demand_approach(counts, priority_order)`.
+  - Formulated a deterministic tie-breaking policy prioritizing directional order (`North` > `South` > `East` > `West`).
+  - Added robust validation to reject negative values with descriptive `ValueError` exceptions.
+  - Handled edge cases: empty dictionaries return `None`, all-zero intersection demand returns `None`.
+  - Enhanced `generate_traffic_summary(counts)` to flag recommended green approaches directly in the summary table.
+- **Demonstration & Architectural Education (`main.py`)**:
+  - Demonstrated sequential `if / elif / else` conditional blocks.
+  - Demonstrated iterating over dictionary key-value pairs using `for` loops.
+  - Walked through clear leader scenarios vs. tied scenarios.
+  - Documented why single-frame vehicle count alone is insufficient for real-world signal control (starvation, delay accumulation, safety intervals, clearance times, emergency preemption).
+- **Automated Unit Testing Expansion (`tests/test_traffic_data.py`)**:
+  - Expanded test suite from 9 to 16 unit tests.
+  - Tested single clear leader, 2-way ties, 4-way ties, custom priority orders, empty dictionaries, all-zero traffic, and negative value error handling.
+  - Achieved 100% pass rate across all 16 tests in 0.001s.
+
+### 2. Concepts Learned
+- **Conditional Branching (`if`, `elif`, `else`)**:
+  - Evaluates expressions sequentially; the first branch evaluating to `True` executes while the rest are skipped.
+  - Using comparison operators (`<=`, `==`, `>`) to establish non-overlapping numerical intervals.
+- **Loops (`for` Iteration)**:
+  - Iterating cleanly across dictionaries using `counts.items()` without index counters.
+- **Deterministic Decision Making**:
+  - Ensuring automated algorithms avoid non-deterministic behavior (e.g., random coin flips or arbitrary dictionary order) when ties occur.
+- **Traffic Engineering vs. Prototype Logic**:
+  - Recognizing the gap between greedy instantaneous vehicle-count heuristics and true actuated signal timing (e.g., NEMA phase dual-ring controllers, min/max green times, coordination, pedestrian walk intervals).
+
+### 3. Challenges & Resolutions
+- **Issue**: How to treat intersections where all approaches report zero vehicles.
+- **Resolution**: Returning `None` explicitly conveys "no active demand" rather than arbitrarily allocating green to an empty road.
+- **Issue**: Preventing tie-breaking from relying on Python dictionary ordering across different platforms.
+- **Resolution**: Created `DEFAULT_APPROACH_PRIORITY` tuple and explicitly scanned candidate approaches in declared priority order.
+
+### 4. Next Steps (Day 4)
+- Advance from static snapshot counts to multi-step dynamic simulation over time (discrete time steps / ticks).
+- Implement vehicle arrival and departure queues using Python collections (lists and queues).
+- Track waiting times per vehicle to implement anti-starvation logic.

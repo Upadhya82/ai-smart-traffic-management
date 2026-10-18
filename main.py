@@ -1,9 +1,11 @@
 """
 AI Smart Traffic Management System
-Day 2: Traffic Data Modeling & Python Fundamentals
+Day 3: Python Control Flow & Traffic Signal Simulation Logic
 
-This entry point demonstrates core Python data types and calls the
-traffic data modeling functions from `src.traffic_data`.
+This entry point demonstrates:
+1. Conditionals (`if`, `elif`, `else`) for demand classification.
+2. Loops (`for`) for iterating through intersection approaches.
+3. Deterministic decision-making to allocate simulated green phases.
 """
 
 import sys
@@ -11,60 +13,84 @@ from src.traffic_data import (
     calculate_total_vehicles,
     classify_traffic_demand,
     print_traffic_summary,
+    select_highest_demand_approach,
 )
 
 
-def demonstrate_python_types() -> None:
-    """Demonstrate basic Python data types using traffic domain examples."""
-    # 1. str: Road names, intersection labels, direction identifiers
-    road_name: str = "Main Street & 5th Avenue"
+def demonstrate_conditionals() -> None:
+    """Teach conditional branching using sample vehicle counts."""
+    print("--- 1. Conditional Statements (if / elif / else) ---")
+    sample_counts = [3, 11, 24]
 
-    # 2. int: Discrete counts of physical objects (vehicles, pedestrians)
-    vehicle_count: int = 12
+    for count in sample_counts:
+        # if / elif / else evaluates mutually exclusive conditions sequentially
+        if count <= 5:
+            classification = "LOW (0-5 vehicles)"
+        elif count <= 15:
+            classification = "MEDIUM (6-15 vehicles)"
+        else:
+            classification = "HIGH (16+ vehicles)"
 
-    # 3. float: Continuous measurements with decimal precision (speed, sensor distance)
-    average_speed_kmh: float = 42.8
-
-    # 4. bool: Binary operational states (True/False)
-    is_signal_green: bool = True
-
-    print("--- Fundamental Python Types in Traffic Modeling ---")
-    print(f"  [str]   Road Name            : '{road_name}'")
-    print(f"  [int]   Sample Vehicle Count : {vehicle_count}")
-    print(f"  [float] Average Speed (km/h) : {average_speed_kmh:.1f}")
-    print(f"  [bool]  Is Signal Green?     : {is_signal_green}")
-    print(f"  Signal Status Description    : {'PASS (Green Light)' if is_signal_green else 'STOP (Red Light)'}")
+        print(f"  Count: {count:<2} -> Classified Demand: {classification}")
     print()
 
 
+def demonstrate_loops_and_decision() -> None:
+    """Teach iteration and traffic signal green phase selection."""
+    print("--- 2. Intersection Approaches & Green Phase Allocation ---")
+
+    # Scenario A: Clear highest-demand approach (East has 18 vehicles)
+    print("\n[Scenario A: Clear Demand Leader]")
+    scenario_a = {
+        "North": 4,   # LOW
+        "South": 12,  # MEDIUM
+        "East": 18,   # HIGH (Highest)
+        "West": 1,    # LOW
+    }
+    print_traffic_summary(scenario_a)
+
+    # Scenario B: Tie between North and South (both have 14 vehicles)
+    print("\n[Scenario B: Tie Between Approaches (Deterministic Tie-Breaker)]")
+    scenario_b = {
+        "North": 14,  # Tied for highest
+        "South": 14,  # Tied for highest
+        "East": 5,
+        "West": 2,
+    }
+    print_traffic_summary(scenario_b)
+    winner_b = select_highest_demand_approach(scenario_b)
+    print(f"Tie-breaking rule selected '{winner_b}' (North > South > East > West).")
+    print()
+
+
+def explain_engineering_limitations() -> None:
+    """Explain why vehicle count alone is insufficient for real-world signal control."""
+    print("--- 3. Engineering Context: Why Count Alone Is Not Enough ---")
+    print("In this simulation, green is allocated strictly by instantaneous count.")
+    print("However, real municipal traffic signals require:")
+    print("  1. Starvation Prevention: Vehicles on low-volume roads must not wait forever.")
+    print("  2. Delay / Wait Times   : Prioritizing cars waiting 2 minutes over cars just arrived.")
+    print("  3. Safety Clearances    : Minimum green times and yellow/all-red clearance intervals.")
+    print("  4. Phase Coordination   : Dual non-conflicting flows (e.g. North + South together).")
+    print("  5. Pedestrian Safety    : Walk signals require guaranteed crossing time.")
+    print("  6. Emergency Vehicles   : Preempting normal cycles for ambulances and fire trucks.")
+
+
 def main() -> None:
-    """Run the Day 2 traffic modeling demonstration."""
+    """Run the Day 3 demonstration."""
     separator = "=" * 60
     print(separator)
-    print("[AI Smart Traffic Management System - Day 2]")
+    print("[AI Smart Traffic Management System - Day 3]")
     print(separator)
     print(f"Python Runtime : {sys.version.split()[0]} ({sys.platform})")
     print()
 
-    # Step 1: Demonstrate basic types
-    demonstrate_python_types()
+    demonstrate_conditionals()
+    demonstrate_loops_and_decision()
+    explain_engineering_limitations()
 
-    # Step 2: Model 4-way intersection approaches using a dictionary
-    print("--- Modeling 4-Way Intersection Approaches ---")
-    intersection_counts = {
-        "North": 4,   # LOW demand (0-5)
-        "South": 12,  # MEDIUM demand (6-15)
-        "East": 18,   # HIGH demand (16+)
-        "West": 1,    # LOW demand (0-5)
-    }
-
-    # Step 3: Print formatted summary of the approaches
-    print_traffic_summary(intersection_counts)
-
-    # Step 4: Display total and overall intersection load
-    total_vehicles = calculate_total_vehicles(intersection_counts)
-    print(f"\nSystem Notice: {total_vehicles} total vehicles detected across intersection.")
-    print("Thresholds used are illustrative demo boundaries for Day 2.")
+    print("\n" + separator)
+    print("Day 3 Simulation & Control Flow Demo Complete.")
     print(separator)
 
 
