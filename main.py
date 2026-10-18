@@ -6,6 +6,7 @@ This entry point demonstrates:
 1. Conditionals (`if`, `elif`, `else`) for demand classification.
 2. Loops (`for`) for iterating through intersection approaches.
 3. Deterministic decision-making to allocate simulated green phases.
+4. Foundation for Day 4 multi-step dynamic simulation.
 """
 
 import sys
