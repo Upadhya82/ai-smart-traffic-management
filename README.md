@@ -1,7 +1,7 @@
 # AI Smart Traffic Management System
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Status](https://img.shields.io/badge/Status-Day%203%20Completed-brightgreen.svg)]()
+[![Status](https://img.shields.io/badge/Status-Day%204%20Completed-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-green.svg)]()
 
 An intelligent, vision-based traffic management and signal control simulation designed to analyze traffic density, detect vehicles and pedestrians, and adaptively optimize intersection signal timings.
@@ -44,7 +44,7 @@ For detailed problem definition and safety scope, see [Project Goals](docs/proje
 - [x] **Day 1**: Project initialization, environment verification, Git/GitHub setup, and documentation structure.
 - [x] **Day 2**: Python fundamentals review, data structures, and initial traffic domain modeling (intersections, lanes, signals).
 - [x] **Day 3**: Python control flow, loops, and deterministic traffic-demand selection logic.
-- [ ] **Day 4**: Advanced collections, vehicle queues, and multi-step arrival/departure simulation.
+- [x] **Day 4**: Dynamic traffic queue simulation, vehicle arrivals/departures, and delay tracking.
 - [ ] **Day 5**: Video ingestion pipeline, frame extraction, and region-of-interest (ROI) configuration.
 - [ ] **Day 6**: Background subtraction & classic computer vision vehicle counting basics.
 - [ ] **Day 7**: Deep learning object detection integration (vehicle & pedestrian detection).
@@ -56,19 +56,21 @@ For detailed problem definition and safety scope, see [Project Goals](docs/proje
 ## 📁 Project Structure
 ```text
 ai-smart-traffic-management/
-├── .gitignore               # Excludes .venv, cache, secrets, and large media
-├── README.md                # Project documentation and roadmap
-├── requirements.txt         # Initial project dependencies
-├── main.py                  # Primary application entry point
-├── docs/                    # Architectural and development documentation
-│   ├── project-goals.md     # Problem statement, solution architecture, safety scope
-│   └── development-log.md   # Daily development progress log
-├── src/                     # Source package for core modules
-│   ├── __init__.py          # Package initialization
-│   └── traffic_data.py      # Traffic counts and demand classification
-└── tests/                   # Automated test suite
-    ├── __init__.py          # Tests package initialization
-    └── test_traffic_data.py # Unit tests for traffic data calculations
+├── .gitignore                    # Excludes .venv, cache, secrets, and large media
+├── README.md                     # Project documentation and roadmap
+├── requirements.txt              # Initial project dependencies
+├── main.py                       # Primary application entry point
+├── docs/                         # Architectural and development documentation
+│   ├── project-goals.md          # Problem statement, solution architecture, safety scope
+│   └── development-log.md        # Daily development progress log
+├── src/                          # Source package for core modules
+│   ├── __init__.py               # Package initialization
+│   ├── traffic_data.py           # Traffic counts and demand classification
+│   └── traffic_simulation.py     # Dynamic queue simulation & delay tracking
+└── tests/                        # Automated test suite
+    ├── __init__.py               # Tests package initialization
+    ├── test_traffic_data.py      # Unit tests for traffic data calculations
+    └── test_traffic_simulation.py# Unit tests for dynamic queue simulation
 ```
 
 ---

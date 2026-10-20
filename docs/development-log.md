@@ -137,3 +137,60 @@
 - Advance from static snapshot counts to multi-step dynamic simulation over time (discrete time steps / ticks).
 - Implement vehicle arrival and departure queues using Python collections (lists and queues).
 - Track waiting times per vehicle to implement anti-starvation logic.
+
+---
+
+## Day 4: Dynamic Traffic Queue Simulation & Delay Tracking
+- **Date**: October 21, 2026
+- **Status**: Completed
+
+### 1. Work Completed
+- **Traffic Simulation Module (`src/traffic_simulation.py`)**:
+  - Built discrete-time queue simulation for a 4-way intersection (`North`, `South`, `East`, `West`).
+  - Implemented `create_initial_queues()` with input validation and defensive copying.
+  - Implemented `simulate_step()` executing arrivals, green-phase departures (bounded by departure rate and current queue size), and non-negative queue bounds.
+  - Implemented `run_simulation()` coordinating multi-step runs with support for both caller-specified green schedules and automatic adaptive demand selection (`select_highest_demand_approach`).
+  - Implemented queue-based waiting time tracking calculating per-step delay and cumulative intersection delay.
+  - Implemented `generate_simulation_summary()` and `print_simulation_summary()` rendering readable ASCII progress tables.
+- **Application Integration (`main.py`)**:
+  - Preserved Day 1–3 demonstrations and added Section 3 demonstrating a 4-step simulation with dynamic arrivals and adaptive signal selection.
+- **Automated Testing Suite (`tests/test_traffic_simulation.py`)**:
+  - Authored 13 dedicated unit tests covering:
+    1. Default empty initial queues.
+    2. Correct arrival distribution per approach.
+    3. Departure restriction strictly to the green approach.
+    4. Departures never exceeding waiting queue.
+    5. Non-negative queue invariants under high departure rates.
+    6. Empty queue handling during green phases.
+    7. Multi-step deterministic progression.
+    8. Cumulative waiting-time tracking verification.
+    9. Rejection of negative queues, negative rates, and non-integer types (including bools).
+    10. Rejection of invalid approach names.
+    11. Verification that caller input data is never mutated.
+    12. Zero-step simulation behavior.
+    13. Integration with Day 3 adaptive demand selection.
+  - Full test suite now contains 29 tests passing with 100% success rate.
+
+### 2. Concepts Learned & Waiting-Time Calculation
+- **Discrete-Time Simulation (Ticks)**:
+  - Modeling time as sequential discrete steps ($t_1, t_2, \dots, t_N$) where state changes occur synchronously in phases (Arrivals $\rightarrow$ Selection $\rightarrow$ Departure $\rightarrow$ Metrics).
+- **Waiting-Time Rule & Calculation**:
+  - At the end of each simulation step, any vehicle remaining in queue has experienced 1 time step of delay.
+  - Step Delay = $\sum (\text{Remaining vehicles on all approaches at end of step})$.
+  - Cumulative Delay = $\sum_{t=1}^{N} (\text{Step Delay}_t)$.
+- **Simulation Limitations**:
+  - Aggregated queue vs. individual vehicle tracking: We approximate delay by queue occupancy rather than stamping arrival times on individual vehicle objects.
+  - Uniform departure rate: Real vehicles incur start-up lost time (reaction latency) and variable turning speeds.
+  - Discrete batching: Real traffic flows continuously rather than in synchronized discrete pulses.
+- **Defensive Immutability in Python**:
+  - Using dictionary copies (`dict.copy()` and dictionary comprehensions) to ensure that running a simulation does not unexpectedly modify caller dictionaries.
+
+### 3. Challenges & Resolutions
+- **Issue**: In Python, `isinstance(True, int)` evaluates to `True` because `bool` is a subclass of `int`.
+- **Resolution**: Explicitly checked `not isinstance(x, bool)` during input validation to prevent boolean values from being accepted as numeric vehicle counts.
+- **Issue**: Ensuring clean integration between Day 3's instantaneous demand selection and Day 4's multi-step queues.
+- **Resolution**: Allowed `run_simulation()` to look ahead at updated queues (queue + arrivals) to dynamically select the highest-demand green approach when no fixed schedule is provided.
+
+### 4. Next Steps (Day 5)
+- Video ingestion pipeline: OpenCV basics (`cv2.VideoCapture`), frame extraction, and video metadata inspection.
+- Region of Interest (ROI) specification: Defining lane boundaries and bounding boxes over camera coordinates.
