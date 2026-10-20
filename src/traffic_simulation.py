@@ -335,3 +335,4 @@ def generate_simulation_summary(result: SimulationResult) -> str:
 def print_simulation_summary(result: SimulationResult) -> None:
     """Print the formatted simulation summary to standard output."""
     print(generate_simulation_summary(result))
+
